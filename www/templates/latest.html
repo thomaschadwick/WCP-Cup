@@ -1,0 +1,32 @@
+<ion-view view-title="Latest Results">
+    <ion-content style="color: #fff; background-image: url('img/grass.png'); background-position: bottom; background-size: cover;">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="fetchResults()">
+        </ion-refresher>
+        <div style="text-align: center; margin-top: 100px;" ng-show="matches.length == 0">
+            <h4 style="color: #fff;">No results found.</h4>
+        </div>
+        <div class="card" ng-show="matches.length > 0" ng-repeat="group in matches | groupBy:'shortDate' | toArray:true" style="background: none; border: 1px solid #000">
+            <div class="item item-divider" style="text-align: center; background-color:#2c3e50; color:#fff; border-bottom: 1px solid #2c3e50">
+                {{group.$key}}
+            </div>
+            <div class="item item-body" ng-repeat="match in group | orderBy: 'time'" style="background: none; border: 0; padding: 15px 5px 15px 5px">
+                <div style="text-align: center; color: #fff; padding-bottom: 5px;">
+                    {{match.type}}
+                </div>
+                <div class="row" style="padding: 0; margin-left: 0; margin-right: 0;">
+                    <div class="col" style="text-align:center; color: #fff; margin: 0; padding: 0;">
+                        <img ng-src="{{match.home.flag.url}}"/><br>
+                        {{match.home.name}}
+                    </div>
+                    <div class="col" style="text-align:center; color: #fff; padding: 0; margin: 0;">
+                        <b>{{match.homeScore}} : {{match.awayScore}}</b>
+                    </div>
+                    <div class="col" style="text-align:center; color: #fff; margin: 0; padding: 0; margin-left: -3px;">
+                        <img ng-src="{{match.away.flag.url}}"/><br>
+                        {{match.away.name}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

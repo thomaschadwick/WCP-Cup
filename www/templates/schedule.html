@@ -1,0 +1,30 @@
+<ion-view view-title="Schedule">
+    <ion-content style="color: #fff; background-image: url('img/grass.png'); background-position: left; background-size: cover;">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="fetchSchedule()">
+        </ion-refresher>
+        <div class="list" ng-repeat="group in matches | groupBy:'shortDate' | toArray:true">
+            <div class="item item-divider" style="background-color:#2c3e50; color:#fff; border: 0">
+                {{group.$key}}
+            </div>
+            <table class="item" ng-repeat="match in group | orderBy: 'time'" style="">
+                <tr>
+                    <td style="padding-right: 5px;">
+                        {{match.time}}
+                    </td>
+                    <td style="position: absolute; top: 0; text-align: right; width: 100%; left: 0; padding-right: 10px; font-size: 0.75rem; color: #7f8c8d">
+                        {{match.type}}
+                    </td>
+                    <td style="padding-right: 5px;">
+                        <b>{{match.home.name}}</b> 
+                    </td>
+                    <td>{{match.homeScore}}</td>
+                    <td>&nbsp;-&nbsp;</td>
+                    <td>{{match.awayScore}}</td>
+                    <td>
+                        <b>&nbsp;{{match.away.name}}</b> 
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </ion-content>
+</ion-view>
